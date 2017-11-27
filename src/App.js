@@ -46,10 +46,9 @@ class App extends Component {
           </Grid>
         </Jumbotron>
         <PushList
-          pushList={this.state.pushList} />
-        <Button type="submit" onClick={this.addPush}>
-          Add
-        </Button>
+          pushList={this.state.pushList}
+          addPush={this.addPush}
+        />
       </div>
     );
   }
