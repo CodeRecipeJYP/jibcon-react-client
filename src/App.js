@@ -1,24 +1,51 @@
 import React, { Component } from 'react';
 import {Grid, Jumbotron} from "react-bootstrap";
 import SearchForm from "./component/SearchForm";
-import Results from "./component/Results";
+import PushList from "./component/PushList";
+import FirebaseDatabase from "./firebase/FirebaseDatabase"
 
 class App extends Component {
-    render() {
-        return (
-            <div>
-                <Jumbotron>
-                    <Grid>
-                        <h1>Search App</h1>
-                        <p>This is a simple search app</p>
+  componentDidMount = () => {
+    console.log("componentDidMount");
+    this.loadData(true);
+  };
 
-                        <SearchForm />
-                    </Grid>
-                </Jumbotron>
-                <Results />
-            </div>
-        );
+
+  loadData(forceUpdate) {
+    if (!forceUpdate) {
+      if (this.state.pushList.length !== 0) {
+        return;
+      }
     }
+
+    FirebaseDatabase.getPushList((results) => this.setState({
+      ...this.state,
+      pushList: results,
+    }));
+  }
+
+  state = {
+    pushList: [],
+  };
+
+
+
+  render() {
+    return (
+      <div>
+        <Jumbotron>
+          <Grid>
+            <h1>Search App</h1>
+            <p>This is a simple search app</p>
+
+            <SearchForm />
+          </Grid>
+        </Jumbotron>
+        <PushList
+          pushList={this.state.pushList} />
+      </div>
+    );
+  }
 }
 
 export default App;
