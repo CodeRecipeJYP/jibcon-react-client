@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Jumbotron} from "react-bootstrap";
+import {Button, Grid, Jumbotron} from "react-bootstrap";
 import SearchForm from "./component/SearchForm";
 import PushList from "./component/PushList";
 import FirebaseDatabase from "./firebase/FirebaseDatabase"
@@ -11,7 +11,7 @@ class App extends Component {
   };
 
 
-  loadData(forceUpdate) {
+  loadData = (forceUpdate) => {
     if (!forceUpdate) {
       if (this.state.pushList.length !== 0) {
         return;
@@ -22,7 +22,11 @@ class App extends Component {
       ...this.state,
       pushList: results,
     }));
-  }
+  };
+
+  addPush = () => {
+    FirebaseDatabase.insertPush();
+  };
 
   state = {
     pushList: [],
@@ -43,6 +47,9 @@ class App extends Component {
         </Jumbotron>
         <PushList
           pushList={this.state.pushList} />
+        <Button type="submit" onClick={this.addPush}>
+          Add
+        </Button>
       </div>
     );
   }
