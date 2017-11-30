@@ -3,6 +3,8 @@ import {Button, Grid, Jumbotron} from "react-bootstrap";
 import SearchForm from "./component/SearchForm";
 import PushList from "./component/PushList";
 import FirebaseDatabase from "./firebase/FirebaseDatabase"
+import SensorValueList from "./component/SensorValueList";
+import SensorValueRepo from "./firebase/repo/SensorValueRepo";
 
 class App extends Component {
   componentDidMount = () => {
@@ -10,8 +12,25 @@ class App extends Component {
     this.loadData(true);
   };
 
-
   loadData = (forceUpdate) => {
+    this.loadPushData(forceUpdate);
+    this.loadSensorValueData(forceUpdate);
+  };
+
+  loadSensorValueData = (forceUpdate) => {
+    if (!forceUpdate) {
+      if (this.state.sensorValueList.length !== 0) {
+        return;
+      }
+    }
+
+    SensorValueRepo.getSensorValueList((results) => this.setState({
+      ...this.state,
+      sensorValueList: results,
+    }));
+  };
+
+  loadPushData = (forceUpdate) => {
     if (!forceUpdate) {
       if (this.state.pushList.length !== 0) {
         return;
@@ -25,11 +44,25 @@ class App extends Component {
   };
 
   addPush = () => {
-    FirebaseDatabase.insertPush();
+    FirebaseDatabase.insertPush()
+      .then(new Promise((resolve, reject) => {
+        this.loadPushData(true);
+        resolve();
+      }));
+  };
+
+  addSensorValue = () => {
+    const tmp = SensorValueRepo.insertSensorValue("123", 1);
+    console.log("App.js", "addSensorValue/", tmp);
+    tmp.then(new Promise((resolve, reject) => {
+      this.loadSensorValueData(true);
+      resolve();
+    }));
   };
 
   state = {
     pushList: [],
+    sensorValueList: [],
   };
 
 
@@ -48,6 +81,11 @@ class App extends Component {
         <PushList
           pushList={this.state.pushList}
           addPush={this.addPush}
+        />
+
+        <SensorValueList
+          sensorValueList={this.state.sensorValueList}
+          addSensorValue={this.addSensorValue}
         />
       </div>
     );

@@ -1,13 +1,8 @@
-import * as firebase from 'firebase';
-const config = {
-  apiKey: "AIzaSyAgBKIdh-aXxPz1D9RJOvOt-gJZFnVvoqM",
-  authDomain: "jibcon-smarts.firebaseapp.com",
-  databaseURL: "https://jibcon-smarts.firebaseio.com",
-  projectId: "jibcon-smarts",
-  storageBucket: "jibcon-smarts.appspot.com",
-  messagingSenderId: "1048863648409"
-};
-const firebaseDatabase = firebase.initializeApp(config).database();
+import Firebase from "./Firebase";
+import Consts from "../utils/Consts"
+
+const pushListRefName = Consts.pushListRefName;
+
 const snapshotToArray = (snapshot) => {
   let returnArr = [];
 
@@ -22,7 +17,7 @@ const snapshotToArray = (snapshot) => {
 
 const FirebaseDatabase = {
   getPushList: (done) => {
-    firebaseDatabase.ref("pushList").once('value').then(
+    Firebase.database().ref(pushListRefName).once('value').then(
       (snapshot) => {
         console.log("FirebaseDatabse/ snapshot:", snapshot.val());
         done(snapshotToArray(snapshot));
@@ -41,7 +36,7 @@ const FirebaseDatabase = {
   },
 
   insertPush: () => {
-    let key = firebaseDatabase.ref("pushList").push().key;
+    let key = Firebase.database().ref(pushListRefName).push().key;
     let updates = {};
     updates[key] = {
       sender: 'Euijun2',
@@ -49,9 +44,9 @@ const FirebaseDatabase = {
       at: 'Mon 27 Nov 11:54',
     };
 
-    return firebaseDatabase.ref("pushList").update(updates);
+    return Firebase.database().ref(pushListRefName).update(updates);
   }
 };
 
-// module.exports = FirebaseDatabase;
+// module.exports = SensorValueRepo;
 export default FirebaseDatabase;
