@@ -8,11 +8,22 @@ const db = Firebase.database();
 
 
 const SensorValueRepo = {
+  setOnDataChangedListener: (listener) => {
+    db.ref(sensorValueRefName).orderByKey().on('value', (snapshot) => {
+        console.log("FirebaseDatabse/ snapshot:", snapshot.val());
+        let results = ListUtils.snapshotToArray(snapshot);
+        results = results.reverse();
+        listener(results);
+      }
+    );
+  },
+
   getSensorValueList: (done) => {
     db.ref(sensorValueRefName).once('value').then(
       (snapshot) => {
         console.log("FirebaseDatabse/ snapshot:", snapshot.val());
-        done(ListUtils.snapshotToArray(snapshot));
+        let results = ListUtils.snapshotToArray(snapshot);
+        done(results);
       }
     );
   },

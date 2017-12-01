@@ -9,7 +9,15 @@ import SensorValueRepo from "./firebase/repo/SensorValueRepo";
 class App extends Component {
   componentDidMount = () => {
     console.log("componentDidMount");
-    this.loadData(true);
+    // this.loadData(true);
+    this.initDataListener();
+  };
+
+  initDataListener = () => {
+    SensorValueRepo.setOnDataChangedListener((results) => this.setState({
+      ...this.state,
+      sensorValueList: results,
+    }));
   };
 
   loadData = (forceUpdate) => {
@@ -46,7 +54,7 @@ class App extends Component {
   addPush = () => {
     FirebaseDatabase.insertPush()
       .then(new Promise((resolve, reject) => {
-        this.loadPushData(true);
+        // this.loadPushData(true);
         resolve();
       }));
   };
@@ -55,7 +63,7 @@ class App extends Component {
     const tmp = SensorValueRepo.insertSensorValue("123", 1);
     console.log("App.js", "addSensorValue/", tmp);
     tmp.then(new Promise((resolve, reject) => {
-      this.loadSensorValueData(true);
+      // this.loadSensorValueData(true);
       resolve();
     }));
   };
