@@ -7,6 +7,7 @@ import {
 
 
 import Index from "./component/Index";
+import Invitation from "./component/Invitation";
 
 const App = () => (
   <BrowserRouter>
@@ -14,7 +15,7 @@ const App = () => (
       {/*<Navbar/>*/}
       <Switch>
         <Route exact path="/" component={Index} />
-        <Route path="/invitation/:invitation_id" component={Index} />
+        <Route path="/invitation/:invitation_id" component={Invitation} />
         <Route component={Index} />
       </Switch>
     </div>
