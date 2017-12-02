@@ -70,8 +70,8 @@ class Invitation extends Component {
         <div className="invitation">
           <LoginNav userinfo={this.state.userinfo} setUserInfo={this.setUserInfo}/>
 
-          <h2>user_id = {this.state.user_id}</h2>
-          <h2>house_id = {this.state.invitation.house_id}</h2>
+          {/*<h2>user_id = {this.state.user_id}</h2>*/}
+          {/*<h2>house_id = {this.state.invitation.house_id}</h2>*/}
           <Button disabled={this.state.isAccepted} type="submit" onClick={this.acceptInvitation}>Accept</Button>
         </div>
       );
