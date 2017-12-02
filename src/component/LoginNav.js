@@ -17,14 +17,23 @@ const LoginNav = (props) => {
   if (!props.userinfo) {
     console.log("props", props.userinfo);
     return (
-      <FacebookLogin
-        appId="440498979632151"
-        autoLoad={false}
-        fields="name,email,picture"
-        callback={responseFacebook}
-        cssClass="my-facebook-button-class"
-        icon="fa-facebook"
-      />
+      <div>
+        <ListGroup>
+          <FacebookLogin
+            appId="440498979632151"
+            autoLoad={false}
+            fields="name,email,picture"
+            callback={responseFacebook}
+            cssClass="my-facebook-button-class"
+            icon="fa-facebook"
+          />
+        </ListGroup>
+
+        <br />
+        <br />
+      </div>
+
+
     )} else {
     return (
       <div>

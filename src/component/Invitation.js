@@ -99,7 +99,8 @@ class Invitation extends Component {
     } else {
       return (
         <div className="invitation">
-          <LoginNav userinfo={this.state.userinfo} setUserInfo={this.setUserInfo} signout={this.signout}/>
+
+            <LoginNav userinfo={this.state.userinfo} setUserInfo={this.setUserInfo} signout={this.signout}/>
 
           <HouseInfo
             master={this.state.houseMaster}
