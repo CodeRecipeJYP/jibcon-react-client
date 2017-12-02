@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from "react-bootstrap";
-
+import { browserHistory } from 'react-router';
 
 import InvitationRepo from "../actions/InvitationRepo";
 import LoginNav from "./LoginNav";
@@ -47,6 +47,8 @@ class Invitation extends Component {
       console.log("HouseInfo/", "postAddToHouse/", result);
       if (result !== null && result.success === true) {
         this.setAcceptedTrue();
+        let gotoUrl = "http://play.google.com/store/apps/details?id=com.sm_arts.jibcon";
+        browserHistory.push(gotoUrl);
       } else {
         console.log("HouseInfo/", "acceptInvitation fail");
       }
