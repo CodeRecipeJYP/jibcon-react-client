@@ -19,7 +19,7 @@ class Invitation extends Component {
   };
 
   acceptInvitation = () => {
-    let user_id = this.state.invitation.user_id;
+    let user_id = this.state.user_id;
     let house_id = this.state.invitation.house_id;
     console.log("Invitation/", "acceptInvitation/", "user_id:", user_id, "house_id:", house_id);
     InvitationRepo.postAddToHouse(user_id, house_id, (result) => {
@@ -35,11 +35,27 @@ class Invitation extends Component {
   state = {
     invitation: null,
     isAccepted: false,
+    user_id: null,
+    userinfo: null,
   };
 
   setAcceptedTrue = () => {
     this.setState({
       isAccepted: true,
+    });
+  };
+
+  setUserInfo = (userinfo) => {
+    console.log("userinfo", userinfo);
+    this.setState({
+      userinfo: userinfo,
+    });
+    this.setUserId(userinfo.id);
+  };
+
+  setUserId = (user_id) => {
+    this.setState({
+      user_id: user_id,
     });
   };
 
@@ -52,9 +68,9 @@ class Invitation extends Component {
     } else {
       return (
         <div className="invitation">
-          <LoginNav />
+          <LoginNav userinfo={this.state.userinfo} setUserInfo={this.setUserInfo}/>
 
-          <h2>user_id = {this.state.invitation.user_id}</h2>
+          <h2>user_id = {this.state.user_id}</h2>
           <h2>house_id = {this.state.invitation.house_id}</h2>
           <Button disabled={this.state.isAccepted} type="submit" onClick={this.acceptInvitation}>Accept</Button>
         </div>

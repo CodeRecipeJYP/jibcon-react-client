@@ -8,7 +8,7 @@ const InvitationRepo = {
   getInvitationById: (id, done) => {
     axios.get(`${host}/api/invitation/findInvitation/${id}`)
       .then(resp => {
-        console.log("InvitationRepo/", "getInvitationById/", resp.data);
+        console.log("UserRepo/", "getInvitationById/", resp.data);
         done(resp.data);
       });
   },
@@ -19,7 +19,7 @@ const InvitationRepo = {
       house_id: house_id,
     })
       .then(resp => {
-        console.log("InvitationRepo/", "postAddToHouse/", resp.data);
+        console.log("UserRepo/", "postAddToHouse/", resp.data);
         done(resp.data);
       });
   }
