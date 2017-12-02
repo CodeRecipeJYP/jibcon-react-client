@@ -2,7 +2,7 @@ import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import PropTypes from 'prop-types';
 import UserRepo from "../actions/UserRepo";
-import {ListGroupItem} from "react-bootstrap";
+import {Button, Col, Grid, Image, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 
 
 const LoginNav = (props) => {
@@ -28,8 +28,27 @@ const LoginNav = (props) => {
     )} else {
     return (
       <div>
-        <ListGroupItem active>{props.userinfo.full_name}</ListGroupItem>
-        <ListGroupItem>{props.userinfo.type}</ListGroupItem>
+        <ListGroup>
+          <Grid>
+            <Row>
+              <Col xs={1} md={1}>
+                <Image src={props.userinfo.pic_url} circle />
+              </Col>
+              <Col xs={3} md={2}>
+                <ListGroupItem active>{props.userinfo.full_name}</ListGroupItem>
+              </Col>
+              <Col xs={3} md={2}>
+                <ListGroupItem>{props.userinfo.type}</ListGroupItem>
+              </Col>
+              <Col xs={3} md={2}>
+                <Button onClick={props.signout}>Logout</Button>
+              </Col>
+            </Row>
+          </Grid>
+        </ListGroup>
+
+        <br />
+        <br />
       </div>
     );
   }
@@ -37,6 +56,7 @@ const LoginNav = (props) => {
 
 LoginNav.propTypes = {
   setUserInfo: PropTypes.func.isRequired,
+  signout: PropTypes.func.isRequired,
 };
 
 export default LoginNav;
