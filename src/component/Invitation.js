@@ -50,7 +50,8 @@ class Invitation extends Component {
     } else {
       return (
         <div className="invitation">
-          <h2>id = {this.state.invitation.toString()}</h2>
+          <h2>user_id = {this.state.invitation.user_id}</h2>
+          <h2>house_id = {this.state.invitation.house_id}</h2>
           <Button disabled={this.state.isAccepted} type="submit" onClick={this.acceptInvitation}>Accept</Button>
         </div>
       );
