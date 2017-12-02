@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {Button} from "react-bootstrap";
 
+
 import InvitationRepo from "../actions/InvitationRepo";
+import LoginNav from "./LoginNav";
 
 class Invitation extends Component {
 
@@ -50,6 +52,8 @@ class Invitation extends Component {
     } else {
       return (
         <div className="invitation">
+          <LoginNav />
+
           <h2>user_id = {this.state.invitation.user_id}</h2>
           <h2>house_id = {this.state.invitation.house_id}</h2>
           <Button disabled={this.state.isAccepted} type="submit" onClick={this.acceptInvitation}>Accept</Button>
