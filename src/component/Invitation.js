@@ -54,7 +54,9 @@ class Invitation extends Component {
   };
 
   signout = () => {
-
+    this.setState({
+      userinfo: null,
+    });
   };
 
   state = {
@@ -107,7 +109,7 @@ class Invitation extends Component {
           />
           {/*<h2>user_id = {this.state.user_id}</h2>*/}
           {/*<h2>house_id = {this.state.invitation.house_id}</h2>*/}
-          <Button disabled={this.state.isAccepted} type="submit" onClick={this.acceptInvitation}>Accept</Button>
+          <Button disabled={!this.state.userinfo || this.state.isAccepted} type="submit" onClick={this.acceptInvitation}>{!this.state.isAccepted ? "Accept" : "Completed"}</Button>
         </div>
       );
     }
