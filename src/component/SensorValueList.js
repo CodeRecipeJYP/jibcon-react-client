@@ -9,6 +9,9 @@ const SensorValueList = (props) => (
     <Button type="submit" onClick={props.addSensorValue}>
       Add
     </Button>
+    <Button type="submit" onClick={props.resetSensorValue}>
+      Reset
+    </Button>
     <ListGroup>
       {props.sensorValueList.map((sensorValue, index) =>
         <SensorValue
@@ -22,6 +25,7 @@ const SensorValueList = (props) => (
 SensorValueList.propTypes = {
   sensorValueList: PropTypes.array.isRequired,
   addSensorValue: PropTypes.func.isRequired,
+  resetSensorValue: PropTypes.func.isRequired,
 };
 
 export default SensorValueList;

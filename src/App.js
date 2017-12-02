@@ -68,6 +68,11 @@ class App extends Component {
     }));
   };
 
+  resetSensorValue = () => {
+    SensorValueRepo.resetData(() => {});
+    console.log("App.js", "resetSensorValue");
+  };
+
   state = {
     pushList: [],
     sensorValueList: [],
@@ -94,6 +99,7 @@ class App extends Component {
         <SensorValueList
           sensorValueList={this.state.sensorValueList}
           addSensorValue={this.addSensorValue}
+          resetSensorValue={this.resetSensorValue}
         />
       </div>
     );

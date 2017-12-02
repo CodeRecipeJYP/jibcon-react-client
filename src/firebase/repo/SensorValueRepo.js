@@ -36,6 +36,12 @@ const SensorValueRepo = {
     updates[key] = new SensorValue(sensor_id, value);
 
     return db.ref(sensorValueRefName).update(updates);
+  },
+
+  resetData: (done) => {
+    db.ref(sensorValueRefName).remove(() => {
+      done();
+    });
   }
 };
 
