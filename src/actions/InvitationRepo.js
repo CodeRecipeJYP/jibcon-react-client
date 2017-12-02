@@ -8,9 +8,21 @@ const InvitationRepo = {
   getInvitationById: (id, done) => {
     axios.get(`${host}/api/invitation/findInvitation/${id}`)
       .then(resp => {
-      console.log("InvitationRepo/", "getInvitationById/", resp);
-    });
-    },
+        console.log("InvitationRepo/", "getInvitationById/", resp.data);
+        done(resp.data);
+      });
+  },
+
+  postAddToHouse: (user_id, house_id, done) => {
+    axios.post(`${host}/api/invitation/addToHouse`, {
+      user_id: user_id,
+      house_id: house_id,
+    })
+      .then(resp => {
+        console.log("InvitationRepo/", "postAddToHouse/", resp.data);
+        done(resp.data);
+      });
+  }
 };
 
 export default InvitationRepo;
