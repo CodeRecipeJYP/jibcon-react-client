@@ -66,10 +66,10 @@ class Invitation extends Component {
     isAccepted: false,
     user_id: null,
     userinfo: null,
-    houseMaster: "정으준",
-    houseName: "으준집",
-    houseType: "사무실",
-    houseAddress: "주니퍼빌4층",
+    houseMaster: "",
+    houseName: "",
+    houseType: "",
+    houseAddress: "",
   };
 
   setAcceptedTrue = () => {
