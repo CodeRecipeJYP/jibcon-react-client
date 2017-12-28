@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Grid, Jumbotron} from "react-bootstrap";
-import { FirebaseAuth } from 'react-firebaseui';
 import firebase_app from './firebase/firebase_app'
 import SigningBar from "./components/SigningBar";
 

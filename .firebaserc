@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "jibcon-smarts",
+    "react-client": "jibcon-smarts"
+  }
+}
