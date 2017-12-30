@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import Rx from 'rx-lite';
+import {MuiThemeProvider} from "material-ui/styles/index";
 
-import {defaultApp} from "./firebase/firebase_app";
-import SigningBar from "./components/SigningBar";
 import ProductInstanceList from "./components/ProductInstanceList";
 import productinstance_service from "./firebase/productinstance_service";
+import Header from "./components/Header";
 
 
 
@@ -25,41 +25,20 @@ class App extends Component {
   }
 
   state = {
-    isSignedIn: false,
     productInstances: {},
-  };
-
-  signInSuccess = (signinOrOut) => {
-    let isSignedIn = !(signinOrOut === false);
-    console.log("App.js/", "signInSuccess/", "signinOrOut=", signinOrOut, "isSignedIn=", isSignedIn);
-    this.setState({
-      isSignedIn: isSignedIn,
-    });
-    console.log("App.js/", "signInSuccess/", "this.state.isSignedIn=", this.state.isSignedIn);
-  };
-
-  signOutSuccess = () => {
-    this.signInSuccess(false);
-  };
-
-  signOut = () => {
-    defaultApp.auth().signOut()
-      .then(() => {
-        // console.log("signOutSuccessed");
-        this.signOutSuccess();
-      });
   };
 
   render() {
     return (
       <div>
-        <SigningBar
-          isSignedIn={this.state.isSignedIn}
-          signOut={this.signOut}
-          signedInSuccess={this.signInSuccess}/>
-        <ProductInstanceList
-          productInstances={this.state.productInstances}
-        />
+        <MuiThemeProvider>
+          <div>
+            <Header />
+            <ProductInstanceList
+              productInstances={this.state.productInstances}
+            />
+          </div>
+        </MuiThemeProvider>
       </div>
     );
   }
