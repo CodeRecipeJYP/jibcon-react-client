@@ -1,13 +1,32 @@
-import React, { Component } from 'react';
-import {Grid, Jumbotron} from "react-bootstrap";
-import firebase_app from './firebase/firebase_app'
+import React, {Component} from 'react';
+import Rx from 'rx-lite';
+
+import {defaultApp} from "./firebase/firebase_app";
 import SigningBar from "./components/SigningBar";
+import ProductInstanceList from "./components/ProductInstanceList";
+import productinstance_service from "./firebase/productinstance_service";
 
 
 
 class App extends Component {
+  compositeDisposable = null;
+
+  componentDidMount() {
+    this.compositeDisposable = new Rx.CompositeDisposable();
+    this.compositeDisposable.add(
+      productinstance_service.productInstances.subscribe(
+        (items) => {
+          this.setState({
+            productInstances: items,
+          });
+        }
+      )
+    );
+  }
+
   state = {
     isSignedIn: false,
+    productInstances: {},
   };
 
   signInSuccess = (signinOrOut) => {
@@ -24,7 +43,7 @@ class App extends Component {
   };
 
   signOut = () => {
-    firebase_app.auth().signOut()
+    defaultApp.auth().signOut()
       .then(() => {
         // console.log("signOutSuccessed");
         this.signOutSuccess();
@@ -34,16 +53,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Jumbotron>
-          <Grid>
-            <h1>Search App</h1>
-            <p>This is a simple search app</p>
-            <SigningBar
-              isSignedIn={this.state.isSignedIn}
-              signOut={this.signOut}
-              signedInSuccess={this.signInSuccess}/>
-          </Grid>
-        </Jumbotron>
+        <SigningBar
+          isSignedIn={this.state.isSignedIn}
+          signOut={this.signOut}
+          signedInSuccess={this.signInSuccess}/>
+        <ProductInstanceList
+          productInstances={this.state.productInstances}
+        />
       </div>
     );
   }

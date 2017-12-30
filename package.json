@@ -9,7 +9,8 @@
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.1.1",
     "react-firebaseui": "^1.0.10",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "rx-lite": "^4.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

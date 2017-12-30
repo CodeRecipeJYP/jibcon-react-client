@@ -1,10 +1,11 @@
 import React from 'react';
-import { FirebaseAuth } from 'react-firebaseui';
+import {FirebaseAuth} from 'react-firebaseui';
 import * as firebase from 'firebase'
-import firebase_app from '../firebase/firebase_app'
 import {Button} from "react-bootstrap";
 import PropTypes from 'prop-types';
 import firebaseui from 'firebaseui'
+
+import {auth} from '../firebase/firebase_app'
 
 
 const SigningBar = (props) => {
@@ -30,7 +31,7 @@ const SigningBar = (props) => {
       { props.isSignedIn ?
         <Button onClick={props.signOut}>Signout</Button>
         :
-        <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase_app.auth()}/>
+        <FirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
           }
     </div>
   );
