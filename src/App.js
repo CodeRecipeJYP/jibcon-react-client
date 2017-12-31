@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Rx from 'rx-lite';
 import {MuiThemeProvider} from "material-ui/styles/index";
 
-import ProductInstanceList from "./components/ProductInstanceList";
+import ProductInstanceList from "./components/ProductInstanceList/index";
 import productinstance_service from "./firebase/productinstance_service";
 import Header from "./components/Header";
 
