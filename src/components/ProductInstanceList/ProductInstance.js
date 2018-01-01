@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {Card, CardHeader, CardText} from "material-ui/Card/index";
 import {Avatar, RaisedButton, SvgIcon} from "material-ui";
 import {blue300, brown50, indigo900, orange200} from "material-ui/styles/colors";
+import axios from 'axios';
 
+import productinstance_service from "../../firebase/productinstance_service";
 
 const style = {margin: 5};
 
@@ -16,7 +18,36 @@ class ProductInstance extends Component {
   }
 
   ringing = () => {
-    console.log("ringing");
+    console.log("ProductInstance.js/", "ringing/");
+
+    // authorization: uid, action, isntanceId
+    let host = "localhost:3005";
+
+    new Promise((resolve, reject) => {
+      productinstance_service.user.take(1).subscribe(
+        (user) => {
+          console.log("ProductInstance.js/", "ringing/", "productinstance_service.user.subscribe", "user=", user);
+          user.getIdToken()
+            .then((idToken) => {
+              resolve(idToken);
+            }).catch((error) => {
+            reject(error);
+          });
+        });
+    }).then(
+      (idToken) => {
+        let id = this.props.id;
+        console.log("ProductInstance.js/", "ringing/", "idToken=", idToken, "id=", id);
+        axios.post(`http://${host}/product_instances/${id}`,
+          { action: "ringing" },
+          { headers: { 'authorization': idToken } }
+        ).then(
+          (response) => {
+            console.log(response);
+          }
+        );
+      }
+    );
   };
 
   handleExpandChange = (expanded) => {
@@ -25,7 +56,7 @@ class ProductInstance extends Component {
   };
 
   render() {
-    console.log("ProductInstance.js/", "props.item=", this.props.item);
+    // console.log("ProductInstance.js/", "props.item=", this.props.item);
     const title = "Android";
     const subTitle = this.props.item.uuid;
 

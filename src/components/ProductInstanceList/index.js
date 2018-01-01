@@ -23,7 +23,7 @@ const ProductInstanceList = (props) => {
   let listItems = entries.map(([key, value], idx) => {
     console.log("ProductInstanceList.js/", "key=", key, "value=", value, "idx=", idx);
     return (<GridTile key={key}>
-        <ProductInstance key={key} item={value}/>
+        <ProductInstance id={key} item={value}/>
       </GridTile>
       );
   });

@@ -7,11 +7,11 @@ export const USERSTATE_SIGNEDIN = 1;
 export const USERSTATE_LOADING = 2;
 
 class ProductinstanceService {
-  user = new Rx.ReplaySubject(null);
+  user = new Rx.ReplaySubject(1);
   userState = Rx.Observable.merge(
     new Rx.BehaviorSubject(USERSTATE_LOADING),
     this.user.select((user, idx, obs) => {
-      console.log("ProductinstanceService.js/", "this.user.select((user, idx, obs) => ", "user=", user);
+      // console.log("ProductinstanceService.js/", "this.user.select((user, idx, obs) => ", "user=", user);
       if (user) {
         return USERSTATE_SIGNEDIN;
       } else {
@@ -25,13 +25,13 @@ class ProductinstanceService {
 
   constructor() {
     auth.onAuthStateChanged(user => {
-      console.log("ProductinstanceService.js/", "constructor/", "onAuthStateChanged", user ? user.uid : 'logged out');
+      // console.log("ProductinstanceService.js/", "constructor/", "onAuthStateChanged", user ? user.uid : 'logged out');
       this.user.onNext(user);
     });
 
     this.user.subscribe(
       (user) => {
-        console.log("ProductinstanceService.js/", "constructor/", "this.user.subscribe/", "user=", user);
+        // console.log("ProductinstanceService.js/", "constructor/", "this.user.subscribe/", "user=", user);
         if (user) {
           this._userRef = database().ref().child("product_instances").child(user.uid);
           this._userRef.on('value', (snapshot) => {
