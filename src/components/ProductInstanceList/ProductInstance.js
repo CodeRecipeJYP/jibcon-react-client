@@ -21,7 +21,8 @@ class ProductInstance extends Component {
     console.log("ProductInstance.js/", "ringing/");
 
     // authorization: uid, action, isntanceId
-    let host = "localhost:3005";
+    // let host = "localhost:3005";
+    let host = "smarts.asuscomm.com:85";
 
     new Promise((resolve, reject) => {
       productinstance_service.user.take(1).subscribe(

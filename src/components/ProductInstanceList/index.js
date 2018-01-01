@@ -20,23 +20,26 @@ const styles = {
 const ProductInstanceList = (props) => {
   console.log("ProductInstanceList.js/", "props.productInstances=", props.productInstances);
   let entries = Object.entries(props.productInstances);
+  // console.log(entries.length);
   let listItems = entries.map(([key, value], idx) => {
     console.log("ProductInstanceList.js/", "key=", key, "value=", value, "idx=", idx);
     return (<GridTile key={key}>
         <ProductInstance id={key} item={value}/>
       </GridTile>
-      );
+    );
   });
 
   return (
     <div style={styles.root}>
-      <GridList
-        cellHeight={180}
-        style={styles.gridList}
-      >
-        <Subheader>ProductInstances</Subheader>
-        {listItems}
-      </GridList>
+      {!entries.length ? null : (
+        <GridList
+          cellHeight={180}
+          style={styles.gridList}
+        >
+          <Subheader>ProductInstances</Subheader>
+          {listItems}
+        </GridList>
+      )}
     </div>
   );
 };

@@ -39,6 +39,7 @@ class ProductinstanceService {
           });
         } else {
           if (this._userRef) {
+            this.updateProductInstances({});
             this._userRef.off();
             this._userRef = null;
           }
