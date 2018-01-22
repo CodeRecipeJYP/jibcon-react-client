@@ -1,0 +1,15 @@
+[debug] [2018-01-02T08:48:29.878Z] ----------------------------------------------------------------------
+[debug] [2018-01-02T08:48:29.881Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2018-01-02T08:48:29.881Z] CLI Version:   3.15.3
+[debug] [2018-01-02T08:48:29.881Z] Platform:      darwin
+[debug] [2018-01-02T08:48:29.881Z] Node Version:  v6.11.2
+[debug] [2018-01-02T08:48:29.882Z] Time:          Tue Jan 02 2018 17:48:29 GMT+0900 (KST)
+[debug] [2018-01-02T08:48:29.882Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-02T08:48:29.893Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-02T08:48:29.894Z] > authorizing via signed-in user
+[debug] [2018-01-02T08:48:29.896Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/jibcon-smarts  
+ Tue Jan 02 2018 17:48:29 GMT+0900 (KST)
+[debug] [2018-01-02T08:48:31.026Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-02T08:48:31.028Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/jibcon-smarts/tokens  
+ Tue Jan 02 2018 17:48:31 GMT+0900 (KST)
